@@ -10,4 +10,6 @@ public class HeaderConstants {
     public static final String CHANNEL =  "X-App-Channel";//渠道
     public static final String X_AUTH_TOKEN = "X-Auth-Token";
 
+    public static final String X_APPID = "X-APPID";//应用ID
+    public static final String X_TIMESTAMP = "X-TIMESTAMP";//当前时间戳
 }
