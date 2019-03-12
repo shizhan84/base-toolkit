@@ -22,16 +22,16 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <maven.compiler.compilerVersion>1.8</maven.compiler.compilerVersion>
-        <github.global.server>github</github.global.server>
+        <github.global.server>github-maven</github.global.server>
         <repository.directory>C:\Users\bluces\github\repository</repository.directory>
     </properties>
 
     <dependencies>
-
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
             <version>3.4</version>
+            <scope>provided</scope>
         </dependency>
 
         <dependency>
@@ -56,6 +56,7 @@
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
             <version>23.0</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>javax.servlet</groupId>
@@ -79,6 +80,7 @@
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
             <version>1.7.24</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 
