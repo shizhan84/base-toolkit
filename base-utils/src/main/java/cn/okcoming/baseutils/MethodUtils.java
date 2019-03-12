@@ -1,6 +1,12 @@
 package cn.okcoming.baseutils;
 
+import org.springframework.beans.factory.BeanFactory;
+import org.springframework.web.context.support.WebApplicationContextUtils;
+
+import javax.servlet.http.HttpServletRequest;
 import java.math.BigDecimal;
+import java.util.Objects;
+import java.util.function.Function;
 
 /**
  * 一些可以共用的方法集合
@@ -59,5 +65,46 @@ public class MethodUtils {
             amLong = Long.valueOf((currency.substring(0, index+1)).replace(".", "")+"00");
         }
         return amLong;
+    }
+
+    /**自定义线程池中线程名称 方便在日志追踪问题*/
+    public static Runnable proxyRunnable(final Thread parentThread, Runnable action){
+        return () -> {
+            String threadName = Thread.currentThread().getName();
+            try{
+                Thread.currentThread().setName(threadName +"-"+parentThread.getName());
+                action.run();
+            }finally {
+                Thread.currentThread().setName(threadName);
+            }
+        };
+    }
+
+    /**自定义线程池中线程名称 方便在日志追踪问题*/
+    public static <T,R> R proxyFunction(Thread parentThread, T name , Function<T,R> fun) {
+        String poolThreadName = Thread.currentThread().getName();
+        if (!Objects.equals(parentThread.getName(), poolThreadName)) {//forkjoin的第一个任务线程就是主线程
+            Thread.currentThread().setName(poolThreadName + "-" + parentThread.getName());
+        }
+        R result = fun.apply(name);
+        Thread.currentThread().setName(poolThreadName);
+        return result;
+    }
+
+    /**
+     * 根据传入的类型获取spring管理的对应bean
+     * @param clazz 类型
+     * @param request 请求对象
+     * @param <T>
+     * @return
+     */
+    public static <T> T getBean(Class<T> clazz, HttpServletRequest request) {
+        BeanFactory factory = WebApplicationContextUtils.getRequiredWebApplicationContext(request.getServletContext());
+        return factory.getBean(clazz);
+    }
+
+    public static <T> T getBean(String name,Class<T> clazz,HttpServletRequest request) {
+        BeanFactory factory = WebApplicationContextUtils.getRequiredWebApplicationContext(request.getServletContext());
+        return factory.getBean(name,clazz);
     }
 }
