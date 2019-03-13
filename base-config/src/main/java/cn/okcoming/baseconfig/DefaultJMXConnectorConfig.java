@@ -1,6 +1,7 @@
 package cn.okcoming.baseconfig;
 
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.jmx.support.ConnectorServerFactoryBean;
 
 /**
@@ -10,7 +11,8 @@ import org.springframework.jmx.support.ConnectorServerFactoryBean;
  *
  * @author bluces
  */
-public abstract class AbstractJMXConnectorConfigurer {
+@Configuration
+public class DefaultJMXConnectorConfig {
 
     @Bean
     public ConnectorServerFactoryBean connectorServerFactoryBean(){

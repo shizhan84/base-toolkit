@@ -13,7 +13,7 @@ import java.util.concurrent.Executor;
  * * @author bluces on 2017/11/9.
  */
 @Configuration
-public class AsyncConfiguration {
+public class DefaultAsyncConfig {
 
     @Bean
     public Executor asyncExecutor() {
