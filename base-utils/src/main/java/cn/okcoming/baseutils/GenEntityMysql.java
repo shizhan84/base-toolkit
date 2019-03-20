@@ -13,8 +13,6 @@ import java.util.Date;
  * 采用@Data来管理getset及toString
  */
 public class GenEntityMysql {
-    private static final GenEntityMysql INSTANCE = new GenEntityMysql();
-
     private String[] colNames; // 列名数组
     private Integer[] colTypes; // 列名类型数组
     private String[] colRemarks; // 列名注释
@@ -25,20 +23,14 @@ public class GenEntityMysql {
 
 
     // TODO 需要修改的地方
-    private static final String URL = "jdbc:mysql://10.10.5.175:3306/xxxxxx?useUnicode=true&characterEncoding=utf-8";
-    private static final String NAME = "root";
-    private static final String PASS = "123456";
-    private static final String DRIVER = "com.mysql.jdbc.Driver";
-    private String packageOutPath = "cn.okcoming.domain";// 指定实体生成所在包的路径
+    public String URL = "jdbc:mysql://10.10.5.175:3306/xxxxxx?useUnicode=true&characterEncoding=utf-8";
+    public String NAME = "root";
+    public String PASS = "123456";
+    public String packageOutPath = "cn.okcoming.domain";// 指定实体生成所在包的路径
+    public String DRIVER = "com.mysql.jdbc.Driver";
     private String authorName = "bluces";// 作者名字
 
-    private String tableName ; //"z_relation_person_company";// 表名 指定需要生成的表的表名 全部生成设置为null
-
-    /**
-     * 类的构造方法
-     */
-    private GenEntityMysql() {
-    }
+    public String tableName ; //"z_relation_person_company";// 表名 指定需要生成的表的表名 全部生成设置为null
 
     /**
      * @return
@@ -179,7 +171,7 @@ public class GenEntityMysql {
      * @version V1.0
      * @throws Exception
      */
-    private void generate() throws Exception {
+    public void generate() throws Exception {
         //与数据库的连接
         Connection con;
         Class.forName(DRIVER);
@@ -248,7 +240,7 @@ public class GenEntityMysql {
 
     public static void main(String[] args) {
         try {
-            INSTANCE.generate();
+            new GenEntityMysql().generate();
             System.out.println("generate classes success!");
         } catch (Exception e) {
             e.printStackTrace();
