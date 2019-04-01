@@ -154,7 +154,7 @@ public class GenEntityMysql {
                 || Types.NVARCHAR== sqlType || Types.NCHAR== sqlType
                 || Types.LONGVARCHAR == sqlType) {
             return "String";
-        } else if (Types.TIMESTAMP== sqlType) {
+        } else if (Types.TIMESTAMP== sqlType || Types.DATE == sqlType) {
             return "Date";
         } else if (Types.BLOB== sqlType) {
             return "Blob";
