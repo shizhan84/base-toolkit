@@ -4,12 +4,12 @@
 
 	<parent>
 		<groupId>cn.okcoming</groupId>
-		<artifactId>spring-web-base</artifactId>
-		<version>0.0.1</version>
+		<artifactId>base-toolkit</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 
 	<artifactId>china-areacode</artifactId>
-	<version>0.0.1</version>
+	<version>0.0.1-SNAPSHOT</version>
 	<name>china area code data</name>
 	<packaging>jar</packaging>
 
@@ -17,14 +17,16 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-jdbc</artifactId>
-			<version>5.0.6.RELEASE</version>
 			<scope>provided</scope>
 		</dependency>
-
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<scope>provided</scope>
+		</dependency>
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
-			<version>1.4.196</version>
 			<scope>runtime</scope>
 		</dependency>
 
@@ -32,7 +34,6 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
-			<version>2.0.2.RELEASE</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>

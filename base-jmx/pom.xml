@@ -3,16 +3,21 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>cn.okcoming</groupId>
-		<artifactId>spring-web-base</artifactId>
-		<version>0.0.1</version>
+		<artifactId>base-toolkit</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 
 	<artifactId>base-jmx</artifactId>
-	<version>0.0.2</version>
-	<name>common jmx operation</name>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>base jmx</name>
 	<packaging>jar</packaging>
 
 	<dependencies>
+
+		<dependency>
+			<groupId>org.jolokia</groupId>
+			<artifactId>jolokia-core</artifactId>
+		</dependency>
 
 		<dependency>
 			<groupId>org.jvnet.opendmk</groupId>
@@ -23,7 +28,7 @@
         <dependency>
             <groupId>cn.okcoming</groupId>
             <artifactId>base-constants</artifactId>
-            <version>0.0.1</version>
+            <version>0.0.1-SNAPSHOT</version>
         </dependency>
     </dependencies>
 
