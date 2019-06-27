@@ -14,7 +14,7 @@ import java.util.Enumeration;
  * @date 2018/9/26 14:20
  */
 @Slf4j
-public class IpUtil {
+public class IpUtils {
 
     private static final String IP_UNKNOWN = "unknown";
 
@@ -49,37 +49,9 @@ public class IpUtil {
                 localIp = ip.getHostAddress();
             }
         } catch (SocketException e) {
-            log.error(e.getMessage(), e);
+            log.warn("{}",ExceptionUtils.exception2detail(e));
         }
         return localIp;
     }
 
-    public static String getRequestIP(HttpServletRequest request){
-
-        String ip = request.getHeader("x-forwarded-for");
-        if (ip != null && ip.length() != 0 && !IP_UNKNOWN.equalsIgnoreCase(ip)) {
-            if( ip.indexOf(",")!=-1 ){
-                ip = ip.split(",")[0];
-            }
-        }
-        if (ip == null || ip.length() == 0 || IP_UNKNOWN.equalsIgnoreCase(ip)) {
-            ip = request.getHeader("Proxy-Client-IP");
-        }
-        if (ip == null || ip.length() == 0 || IP_UNKNOWN.equalsIgnoreCase(ip)) {
-            ip = request.getHeader("WL-Proxy-Client-IP");
-        }
-        if (ip == null || ip.length() == 0 || IP_UNKNOWN.equalsIgnoreCase(ip)) {
-            ip = request.getHeader("HTTP_CLIENT_IP");
-        }
-        if (ip == null || ip.length() == 0 || IP_UNKNOWN.equalsIgnoreCase(ip)) {
-            ip = request.getHeader("HTTP_X_FORWARDED_FOR");
-        }
-        if (ip == null || ip.length() == 0 || IP_UNKNOWN.equalsIgnoreCase(ip)) {
-            ip = request.getHeader("X-Real-IP");
-        }
-        if (ip == null || ip.length() == 0 || IP_UNKNOWN.equalsIgnoreCase(ip)) {
-            ip = request.getRemoteAddr();
-        }
-        return ip;
-    }
 }
