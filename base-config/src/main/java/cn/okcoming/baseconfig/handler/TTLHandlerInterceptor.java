@@ -1,5 +1,6 @@
 package cn.okcoming.baseconfig.handler;
 
+import cn.okcoming.basejmx.MBeanUtils;
 import cn.okcoming.basejmx.mbean.TTLMonitor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -37,34 +38,20 @@ public class TTLHandlerInterceptor implements HandlerInterceptor{
 
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
-        if(server == null){
-            return;
-        }
+        Long ttlBeginTime = (Long) request.getAttribute("TTLBeginTime");
+
         String url = request.getRequestURI();
-        //要持续优化掉不需要的非业务请求url的监控
+        //要持续优化掉不必要的非业务请求url的监控
         if(url.length() > 60 || url.length() < 3){
             return;
         }else if(url.contains("/webjars/") || url.contains("/swagger-") || url.contains("/actuator")){
             return;
         }else{
-            //去掉第一个通用路径
-            url = url.substring(url.indexOf("/",2)).replace("/","_");
+            //去掉第一个项目名称通用路径
+            url = url.substring(url.indexOf("/",2));//.replace("/","_");
         }
-        Long ttlBeginTime = (Long) request.getAttribute("TTLBeginTime");
-        TTLMonitor ttlMonitor = urls.get(url);
-        if(ttlMonitor == null){
-            ttlMonitor = new TTLMonitor();
-            TTLMonitor ret = urls.putIfAbsent(url,ttlMonitor);
-            if(ret == null){//放进去的和取出来的是同一个
-                //MBeanServer server = ManagementFactory.getPlatformMBeanServer();
-                ObjectName mxbeanName = new ObjectName("cn.okcoming.request:type=TTL,name="+url);
-                ttlMonitor.setObjectName(mxbeanName);
-                server.registerMBean(ttlMonitor, mxbeanName);
-            }else{
-                ttlMonitor = ret;
-            }
-        }
-        ttlMonitor.compute(System.currentTimeMillis()- ttlBeginTime);
+
+        MBeanUtils.computeTTL(url,System.currentTimeMillis()- ttlBeginTime);
     }
 
 }

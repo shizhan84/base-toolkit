@@ -1,6 +1,5 @@
 package cn.okcoming.basejmx.mbean;
 
-import javax.management.ObjectName;
 import java.util.concurrent.atomic.AtomicLong;
 
 /**
@@ -9,7 +8,6 @@ import java.util.concurrent.atomic.AtomicLong;
  * @author bluces
  */
 public class TTLMonitor implements TTLMonitorMBean {
-    private ObjectName objectName;
 
     private AtomicLong _0_count = new AtomicLong(0);
     private AtomicLong _1_lt100ms = new AtomicLong(0);
@@ -58,12 +56,5 @@ public class TTLMonitor implements TTLMonitorMBean {
         return _5_gt5s.longValue();
     }
 
-    @Override
-    public ObjectName getObjectName() {
-        return objectName;
-    }
 
-    public void setObjectName(ObjectName objectName) {
-        this.objectName = objectName;
-    }
 }

@@ -2,7 +2,7 @@ package cn.okcoming.basejmx.mbean;
 
 import java.lang.management.PlatformManagedObject;
 
-public interface TTLMonitorMBean extends PlatformManagedObject {
+public interface TTLMonitorMBean {
     long get_0_count();
 
     long get_1_lt100ms();
