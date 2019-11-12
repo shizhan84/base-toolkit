@@ -1,16 +1,15 @@
 package cn.okcoming.baseconfig.handler;
 
 import cn.okcoming.basejmx.MBeanUtils;
-import cn.okcoming.basejmx.mbean.TTLMonitor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.management.*;
+import javax.management.InstanceAlreadyExistsException;
+import javax.management.MBeanRegistrationException;
+import javax.management.MalformedObjectNameException;
+import javax.management.NotCompliantMBeanException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
 
 
 /**
@@ -20,11 +19,6 @@ import java.util.concurrent.ConcurrentMap;
  * @author bluces
  */
 public class TTLHandlerInterceptor implements HandlerInterceptor{
-
-    private static final ConcurrentMap<String, TTLMonitor> urls = new ConcurrentHashMap<>();
-
-    @Autowired(required = false)
-    private MBeanServer server;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws MalformedObjectNameException, NotCompliantMBeanException, InstanceAlreadyExistsException, MBeanRegistrationException {
