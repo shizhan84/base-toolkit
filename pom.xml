@@ -28,8 +28,9 @@
 
     <properties>
         <maven.compiler.compilerVersion>1.8</maven.compiler.compilerVersion>
-        <github.global.server>github-maven</github.global.server>
-        <repository.directory>C:\Users\bluces\github\repository</repository.directory>
+        <!--<github.global.server>github-maven</github.global.server>-->
+        <!--&lt;!&ndash;本地目录需要根据情况变更&ndash;&gt;-->
+        <!--<repository.directory>/data/github_repository</repository.directory>-->
     </properties>
 
     <dependencies>
