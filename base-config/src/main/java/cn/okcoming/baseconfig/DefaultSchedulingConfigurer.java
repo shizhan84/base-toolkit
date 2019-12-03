@@ -7,8 +7,9 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.SchedulingConfigurer;
 import org.springframework.scheduling.config.ScheduledTaskRegistrar;
 
-import java.util.concurrent.Executor;
+
 import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ThreadFactory;
 
 /**
@@ -26,7 +27,7 @@ public class DefaultSchedulingConfigurer implements SchedulingConfigurer {
     }
 
     @Bean
-    public Executor taskExecutor() {
+    public ScheduledExecutorService taskExecutor() {
         ThreadFactory threadFactory = new ThreadFactoryBuilder().
                 setNameFormat("schedule-pool-%d").build();
         return Executors.newScheduledThreadPool(2*Runtime.getRuntime().availableProcessors(),threadFactory);
