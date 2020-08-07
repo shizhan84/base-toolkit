@@ -5,7 +5,9 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.FastDateFormat;
 
 import java.time.Instant;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.Temporal;
 import java.util.TimeZone;
@@ -112,7 +114,7 @@ public class DateUtils {
         return LocalDateTime.ofInstant(instant, TimeZone.getTimeZone("UTC").toZoneId());
     }
 
-    public static LocalDateTime parse(String dateStr,DateTimeFormatter pattern) {
+    public static Temporal parse(String dateStr,DateTimeFormatter pattern) {
         if (null == dateStr) {
             return null;
         }
@@ -126,7 +128,7 @@ public class DateUtils {
      * 2、yyyy-MM-dd <br>
      * 3、HH:mm:ss <br>
      * */
-    public static LocalDateTime parse(String dateStr) {
+    public static Temporal parse(String dateStr) {
         if (null == dateStr) {
             return null;
         }
@@ -135,16 +137,16 @@ public class DateUtils {
         if(dateStr.length() == 19 ){
             return LocalDateTime.parse(dateStr,NORM_DATETIME_PATTERN);
         }else if(dateStr.length() == 10 ){
-            return LocalDateTime.parse(dateStr,NORM_DATE_PATTERN);
+            return LocalDate.parse(dateStr,NORM_DATE_PATTERN);
         }else if(dateStr.length() == 8 ){
-            return LocalDateTime.parse(dateStr,NORM_TIME_PATTERN);
+            return LocalTime.parse(dateStr,NORM_TIME_PATTERN);
         }else{
             return null;
         }
     }
 
     public static void main(String[] args) {
-
+        LocalDate  localDateTime = (LocalDate) parse("2018-01-01");
     }
 
 }
