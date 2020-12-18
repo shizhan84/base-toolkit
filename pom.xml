@@ -3,6 +3,19 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+    <developers>
+        <developer>
+            <name>BlucesWang</name>
+            <email>bluces.wang@outlook.com</email>
+        </developer>
+    </developers>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -16,12 +29,18 @@
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
+    <scm>
+        <tag>master</tag>
+        <url>git@github.com:shizhan84/base-toolkit.git</url>
+        <connection>scm:git:git@github.com:shizhan84/base-toolkit.git</connection>
+        <developerConnection>scm:git:git@github.com:shizhan84/base-toolkit.git</developerConnection>
+    </scm>
 
     <properties>
         <maven.compiler.compilerVersion>1.8</maven.compiler.compilerVersion>
-        <!--<github.global.server>github-maven</github.global.server>-->
+        <github.global.server>github-maven</github.global.server>
         <!--&lt;!&ndash;本地目录需要根据情况变更&ndash;&gt;-->
-        <!--<repository.directory>/data/github_repository</repository.directory>-->
+        <repository.directory>/data/github_repository</repository.directory>
     </properties>
 
     <dependencyManagement>
@@ -108,7 +127,6 @@
             <scope>provided</scope>
         </dependency>
 
-        <!--
         <dependency>
             <groupId>org.jolokia</groupId>
             <artifactId>jolokia-core</artifactId>
@@ -118,7 +136,7 @@
             <artifactId>jmxremote_optional</artifactId>
             <version>1.0_01-ea</version>
         </dependency>
-        -->
+
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
@@ -129,10 +147,6 @@
     </dependencies>
 
     <repositories>
-        <!--<repository>-->
-            <!--<id>github-maven</id>-->
-            <!--<url>https://raw.githubusercontent.com/BlucesWang/mvn-repo/master</url>-->
-        <!--</repository>-->
         <repository>
             <id>aliyun-maven</id>
             <url>http://maven.aliyun.com/nexus/content/repositories/central</url>
@@ -140,21 +154,19 @@
                 <enabled>false</enabled>
             </snapshots>
         </repository>
-        <repository>
-            <id>maven-snapshots</id>
-            <url>http://nexus.yingyingwork.com/content/repositories/maven-snapshots/</url>
-        </repository>
     </repositories>
 
     <distributionManagement>
         <snapshotRepository>
-            <id>maven-snapshots</id>
-            <url>http://nexus.yingyingwork.com/repository/maven-snapshots/</url>
+            <id>sonatype-nexus-snapshots</id>
+            <name>Sonatype Nexus Snapshots</name>
+            <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
         </snapshotRepository>
-        <!--<repository>-->
-            <!--<id>github-maven</id>-->
-            <!--<url>https://raw.githubusercontent.com/BlucesWang/mvn-repo/master</url>-->
-        <!--</repository>-->
+        <repository>
+            <id>sonatype-nexus-staging</id>
+            <name>Nexus Release Repository</name>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
     </distributionManagement>
 
     <build>
@@ -193,35 +205,10 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-deploy-plugin</artifactId>
                 <version>2.8.2</version>
-                <!--<configuration>-->
-                    <!--<altDeploymentRepository>internal.repo::default::file://${repository.directory}/mvn-repo</altDeploymentRepository>-->
-                <!--</configuration>-->
+                <configuration>
+                    <altDeploymentRepository>internal.repo::default::file://${repository.directory}/mvn-repo</altDeploymentRepository>
+                </configuration>
             </plugin>
-
-            <!--<plugin>-->
-                <!--<groupId>com.github.github</groupId>-->
-                <!--<artifactId>site-maven-plugin</artifactId>-->
-                <!--<version>0.12</version>-->
-                <!--<configuration>-->
-                    <!--<message>Maven artifacts for ${project.artifactId}-${project.version}</message>-->
-                    <!--<noJekyll>true</noJekyll>-->
-                    <!--<outputDirectory>${repository.directory}/mvn-repo</outputDirectory>-->
-                    <!--<branch>refs/heads/master</branch>-->
-                    <!--<includes>-->
-                        <!--<include>**/*</include>-->
-                    <!--</includes>-->
-                    <!--<repositoryName>mvn-repo</repositoryName>-->
-                    <!--<repositoryOwner>BlucesWang</repositoryOwner>-->
-                <!--</configuration>-->
-                <!--<executions>-->
-                    <!--<execution>-->
-                        <!--<goals>-->
-                            <!--<goal>site</goal>-->
-                        <!--</goals>-->
-                        <!--<phase>deploy</phase>-->
-                    <!--</execution>-->
-                <!--</executions>-->
-            <!--</plugin>-->
 
         </plugins>
     </build>
